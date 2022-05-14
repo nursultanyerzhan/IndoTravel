@@ -52,8 +52,13 @@ export const timer = deadline => {
 
     const getTimeRemaining = () => {
         const dateStop = new Date(deadline).getTime();
-        const dateNow = Date.now();
-        let dateRemaining = dateStop - dateNow;
+        // const greenwichDateTime = Date.parse(new Date().toUTCString());
+        const greenwichDateTime = new Date(new Date().toUTCString());
+        
+
+        let dateRemaining = dateStop - greenwichDateTime;
+
+        console.log(dateRemaining);
 
         if (dateRemaining < 0) {
             return { dateRemaining };
@@ -76,7 +81,7 @@ export const timer = deadline => {
 
     const start = () => {
         const timer = getTimeRemaining();
-        
+
         const intervalId = setTimeout(start, 1000 * 60);
         if (timer.dateRemaining <= 0) {
             clearTimeout(intervalId);
@@ -100,17 +105,3 @@ export const timer = deadline => {
 
     start();
 }
-
-
-// 5-20, 25-30 дней
-// 1,21,31 день
-// 2,3,4, 22-24 дня
-
-// 5-20 часов
-// 1, 21 час
-// 2-4, 22, 23 часа
-
-// 1, 21, 31, 41, 51 минута
-// 2-4, 22-24, 32-34, 42-44, 52-54 минуты
-// 5-20, 25-30, 35-40, 45-50, 55-60 минут
-
