@@ -1,5 +1,6 @@
 const items = document.querySelectorAll('.travel__item');
 const buttons = document.querySelectorAll('.travel__item-title');
+const nav = document.querySelector('nav');
 
 buttons.forEach((btn, index) => {
     btn.addEventListener('click', () => {
@@ -13,14 +14,30 @@ buttons.forEach((btn, index) => {
     });
 });
 
+let opacity = 0;
+const openMenu = () => {
+    nav.style.zIndex = 1;
+    if (opacity < 1) {
+        opacity += .1;
+        setTimeout(function () { openMenu() }, 100);
+    }
+    nav.style.opacity = opacity;
+}
+
+const closeMenu = () => {
+    nav.style.opacity = 0;
+    opacity = 0;
+}
 
 const body = document.querySelector('body');
-
 body.addEventListener('click', ({ target }) => {
-    const nav = document.querySelector('nav');
 
-    if (target.classList.contains('header__menu-button'))
-        nav.classList.add('header__menu_active');
-    else
-        nav.classList.remove('header__menu_active');
+    if (target.classList.contains('header__menu-button')) {
+        openMenu();
+    }
+    else {
+        if (!target.classList.contains('header__menu'))
+            closeMenu();
+    }
 });
+

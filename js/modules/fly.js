@@ -12,15 +12,25 @@ fly.style.cssText = `
     background: url(img/airplane.svg) center/contain no-repeat;
 `;
 
-if (window.screen.width > 758) 
+if (window.screen.width > 758)
     document.body.append(fly);
 
+let prevScrollPos = 0;
 const calcPositionFly = () => {
     const maxBottom = docEl.scrollWidth - fly.clientHeight;
     const maxScroll = docEl.scrollHeight - docEl.clientHeight;
 
     const percentScroll = (window.pageYOffset * 100) / maxScroll;
     
+    //Повернуть самолет
+    let currentScrollPos = percentScroll;
+    if (currentScrollPos > prevScrollPos) 
+        fly.style.transform = 'rotate(360deg)';
+     else 
+        fly.style.transform = 'rotate(180deg)';
+    
+    prevScrollPos = currentScrollPos;
+
     const bottom = maxBottom * (percentScroll / 100);
     fly.style.bottom = bottom + 'px';
 };

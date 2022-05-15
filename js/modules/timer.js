@@ -1,9 +1,5 @@
 
-const getLikeTwoNumber = num => {
-    if (num < 10)
-        return '0' + num;
-    return num;
-};
+const getLikeTwoNumber = num => (num < 10) ? `0${num}` : num;
 
 const getDayDeclination = day => {
     if (day === 1 || day === 21)
