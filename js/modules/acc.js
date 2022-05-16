@@ -19,7 +19,7 @@ const openMenu = () => {
     nav.style.zIndex = 1;
     if (opacity < 1) {
         opacity += .1;
-        setTimeout(function () { openMenu() }, 100);
+        setTimeout(function () { openMenu() }, 50);
     }
     nav.style.opacity = opacity;
 }
